@@ -69,3 +69,27 @@ awk '{print $6}' "$LOG_FILE" | sort | uniq -c | sort -nr | head -1
 
 echo "---------------------------------------------"
 echo "==============================================="
+
+echo ""
+echo "------------- SECURITY ALERTS -------------"
+echo ""
+echo "Suspicious IPs (More than 3 Failed Logins - 401):"
+
+SUSPICIOUS_401=$(awk '$8 == 401 {print $1}' "$LOG_FILE" | sort | uniq -c | awk '$1 > 3')
+
+if [ -z "$SUSPICIOUS_401" ]; then
+    echo "No suspicious 401 activity detected."
+else
+    echo "$SUSPICIOUS_401"
+fi
+
+echo ""
+echo "Suspicious IPs (More than 3 Not Found Errors - 404):"
+
+SUSPICIOUS_404=$(awk '$8 == 404 {print $1}' "$LOG_FILE" | sort | uniq -c | awk '$1 > 3')
+
+if [ -z "$SUSPICIOUS_404" ]; then
+    echo "No suspicious 404 activity detected."
+else
+    echo "$SUSPICIOUS_404"
+fi
