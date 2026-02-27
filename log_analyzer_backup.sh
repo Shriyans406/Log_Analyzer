@@ -13,53 +13,12 @@ print_banner() {
 }
 
 # ----------- Validate Argument -----------
-#if [ $# -ne 1 ]; then
-#    echo "Usage: $0 <log_file>"
-#    exit 1
-#fi
-
-#LOG_FILE="$1"
-
-# ----------- Default Values -----------
-TOP_COUNT=5
-LOGIN_THRESHOLD=3
-LOG_FILE=""
-
-
-# ----------- Parse Command Line Options -----------
-while getopts "f:t:l:h" opt; do
-    case $opt in
-        f) LOG_FILE="$OPTARG" ;;
-        t) TOP_COUNT="$OPTARG" ;;
-        l) LOGIN_THRESHOLD="$OPTARG" ;;
-        h)
-            echo "Usage: $0 -f <log_file> [-t top_count] [-l login_threshold]"
-            exit 0
-            ;;
-        *)
-            echo "Invalid option"
-            exit 1
-            ;;
-    esac
-done
-
-
-# ----------- Validate Log File -----------
-if [ -z "$LOG_FILE" ]; then
-    echo "Error: Log file must be specified using -f"
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <log_file>"
     exit 1
 fi
 
-if [ ! -f "$LOG_FILE" ]; then
-    echo "Error: File does not exist."
-    exit 1
-fi
-
-if [ ! -s "$LOG_FILE" ]; then
-    echo "Error: File is empty."
-    exit 1
-fi
-
+LOG_FILE="$1"
 
 # ----------- Check File Exists -----------
 if [ ! -f "$LOG_FILE" ]; then
@@ -88,7 +47,7 @@ echo "------------- ANALYTICS -------------"
 # ----------- Top 5 IP Addresses -----------
 echo ""
 echo "Top 5 IP Addresses:"
-awk '{print $1}' "$LOG_FILE" | sort | uniq -c | sort -nr | head -$TOP_COUNT
+awk '{print $1}' "$LOG_FILE" | sort | uniq -c | sort -nr | head -5
 
 # ----------- 4xx Errors -----------
 echo ""
@@ -116,7 +75,7 @@ echo "------------- SECURITY ALERTS -------------"
 echo ""
 echo "Suspicious IPs (More than 3 Failed Logins - 401):"
 
-SUSPICIOUS_401=$(awk '$8 == 401 {print $1}' "$LOG_FILE" | sort | uniq -c | awk -v threshold="$LOGIN_THRESHOLD" '$1 > threshold')
+SUSPICIOUS_401=$(awk '$8 == 401 {print $1}' "$LOG_FILE" | sort | uniq -c | awk '$1 > 3')
 
 if [ -z "$SUSPICIOUS_401" ]; then
     echo "No suspicious 401 activity detected."
@@ -127,7 +86,7 @@ fi
 echo ""
 echo "Suspicious IPs (More than 3 Not Found Errors - 404):"
 
-SUSPICIOUS_404=$(awk '$8 == 404 {print $1}' "$LOG_FILE" | sort | uniq -c | awk -v threshold="$LOGIN_THRESHOLD" '$1 > threshold')
+SUSPICIOUS_404=$(awk '$8 == 404 {print $1}' "$LOG_FILE" | sort | uniq -c | awk '$1 > 3')
 
 if [ -z "$SUSPICIOUS_404" ]; then
     echo "No suspicious 404 activity detected."
