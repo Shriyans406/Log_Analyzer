@@ -88,7 +88,8 @@ echo "------------- ANALYTICS -------------"
 # ----------- Top 5 IP Addresses -----------
 echo ""
 echo "Top 5 IP Addresses:"
-awk '{print $1}' "$LOG_FILE" | sort | uniq -c | sort -nr | head -$TOP_COUNT
+TOP_IPS=$(awk '{print $1}' "$LOG_FILE" | sort | uniq -c | sort -nr | head -$TOP_COUNT)
+echo "$TOP_IPS"
 
 # ----------- 4xx Errors -----------
 echo ""
@@ -144,8 +145,62 @@ awk '{split($4, a, ":"); print a[2]}' "$LOG_FILE" | sort | uniq -c | sort -n
 
 echo ""
 echo "Peak Traffic Hour:"
-awk '{split($4, a, ":"); print a[2]}' "$LOG_FILE" | sort | uniq -c | sort -nr | head -1
+PEAK_HOUR=$(awk '{split($4, a, ":"); print a[2]}' "$LOG_FILE" | sort | uniq -c | sort -nr | head -1)
+echo "$PEAK_HOUR"
 
 echo ""
 echo "Hourly Error Distribution (4xx + 5xx):"
 awk '$8 ~ /^[45]/ {split($4, a, ":"); print a[2]}' "$LOG_FILE" | sort | uniq -c | sort -nr
+
+# ----------- HTML Report Generation -----------
+
+REPORT_FILE="reports/report.html"
+
+
+echo ""
+echo "Generating HTML report..."
+
+cat > "$REPORT_FILE" <<EOF
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log Analysis Report</title>
+    <style>
+        body { font-family: Arial; background-color: #f4f4f4; padding: 20px; }
+        h1 { color: #333; }
+        .section { margin-bottom: 20px; padding: 15px; background: white; border-radius: 5px; }
+        pre { background: #eee; padding: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>Log Analysis Report</h1>
+
+<div class="section">
+<h2>Summary</h2>
+<p><b>Log File:</b> $LOG_FILE</p>
+<p><b>Total Requests:</b> $TOTAL_REQUESTS</p>
+<p><b>4xx Errors:</b> $FOUR_XX</p>
+<p><b>5xx Errors:</b> $FIVE_XX</p>
+<p><b>401 Unauthorized:</b> $UNAUTHORIZED</p>
+</div>
+
+<div class="section">
+<h2>Top $TOP_COUNT IP Addresses</h2>
+<pre>
+$TOP_IPS
+</pre>
+</div>
+
+<div class="section">
+<h2>Peak Traffic Hour</h2>
+<pre>
+$PEAK_HOUR
+</pre>
+</div>
+
+</body>
+</html>
+EOF
+
+echo "HTML Report Generated: $REPORT_FILE"
