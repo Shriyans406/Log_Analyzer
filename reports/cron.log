@@ -94,3 +94,147 @@ Generating HTML report...
 /home/vboxuser/log-analyzer/log_analyzer.sh: line 163: reports/report.html: No such file or directory
 HTML Report Generated: reports/report.html
 Email alert sent to shriyans.s.sahoo@gmail.com
+===============================================
+            LOG ANALYZER REPORT
+===============================================
+Log File: /home/vboxuser/log-analyzer/sample_logs/access.log
+Total Requests: 15
+
+------------- ANALYTICS -------------
+
+Top 5 IP Addresses:
+      6 192.168.1.20
+      4 192.168.1.200
+      2 
+      1 192.168.1.40
+      1 192.168.1.30
+
+4xx Errors: 7
+5xx Errors: 1
+401 Unauthorized: 6
+
+Most Accessed Endpoint:
+      6 /login
+---------------------------------------------
+===============================================
+
+------------- SECURITY ALERTS -------------
+
+Suspicious IPs (More than 3 Failed Logins - 401):
+      6 192.168.1.20
+
+Suspicious IPs (More than 3 Not Found Errors - 404):
+No suspicious 404 activity detected.
+
+------------- TIME ANALYSIS -------------
+
+Requests Per Hour:
+      2 
+     13 10
+
+Peak Traffic Hour:
+     13 10
+
+Hourly Error Distribution (4xx + 5xx):
+      8 10
+
+Generating HTML report...
+/home/vboxuser/log-analyzer/log_analyzer.sh: line 163: reports/report.html: No such file or directory
+HTML Report Generated: reports/report.html
+Email alert sent to shriyans.s.sahoo@gmail.com
+===============================================
+            LOG ANALYZER REPORT
+===============================================
+Log File: /home/vboxuser/log-analyzer/sample_logs/access.log
+Total Requests: 15
+
+------------- ANALYTICS -------------
+
+Top 5 IP Addresses:
+      6 192.168.1.20
+      4 192.168.1.200
+      2 
+      1 192.168.1.40
+      1 192.168.1.30
+
+4xx Errors: 7
+5xx Errors: 1
+401 Unauthorized: 6
+
+Most Accessed Endpoint:
+      6 /login
+---------------------------------------------
+===============================================
+
+------------- SECURITY ALERTS -------------
+
+Suspicious IPs (More than 3 Failed Logins - 401):
+      6 192.168.1.20
+
+Suspicious IPs (More than 3 Not Found Errors - 404):
+No suspicious 404 activity detected.
+
+------------- TIME ANALYSIS -------------
+
+Requests Per Hour:
+      2 
+     13 10
+
+Peak Traffic Hour:
+     13 10
+
+Hourly Error Distribution (4xx + 5xx):
+      8 10
+
+Generating HTML report...
+/home/vboxuser/log-analyzer/log_analyzer.sh: line 163: reports/report.html: No such file or directory
+HTML Report Generated: reports/report.html
+Email alert sent to shriyans.s.sahoo@gmail.com
+===============================================
+            LOG ANALYZER REPORT
+===============================================
+Log File: /home/vboxuser/log-analyzer/sample_logs/access.log
+Total Requests: 15
+
+------------- ANALYTICS -------------
+
+Top 5 IP Addresses:
+      6 192.168.1.20
+      4 192.168.1.200
+      2 
+      1 192.168.1.40
+      1 192.168.1.30
+
+4xx Errors: 7
+5xx Errors: 1
+401 Unauthorized: 6
+
+Most Accessed Endpoint:
+      6 /login
+---------------------------------------------
+===============================================
+
+------------- SECURITY ALERTS -------------
+
+Suspicious IPs (More than 3 Failed Logins - 401):
+      6 192.168.1.20
+
+Suspicious IPs (More than 3 Not Found Errors - 404):
+No suspicious 404 activity detected.
+
+------------- TIME ANALYSIS -------------
+
+Requests Per Hour:
+      2 
+     13 10
+
+Peak Traffic Hour:
+     13 10
+
+Hourly Error Distribution (4xx + 5xx):
+      8 10
+
+Generating HTML report...
+/home/vboxuser/log-analyzer/log_analyzer.sh: line 163: reports/report.html: No such file or directory
+HTML Report Generated: reports/report.html
+Email alert sent to shriyans.s.sahoo@gmail.com
