@@ -204,3 +204,33 @@ $PEAK_HOUR
 EOF
 
 echo "HTML Report Generated: $REPORT_FILE"
+
+# -------------------------------
+# EMAIL ALERT SECTION
+# -------------------------------
+
+ADMIN_EMAIL="shriyans.s.sahoo@gmail.com"
+
+ALERT_MSG=""
+
+# Check suspicious 401
+SUSPICIOUS_401=$(awk '$9 == 401 {print $1}' $LOG_FILE | sort | uniq -c | awk '$1 > 3')
+
+if [ ! -z "$SUSPICIOUS_401" ]; then
+    ALERT_MSG+="Suspicious 401 Attempts:\n$SUSPICIOUS_401\n\n"
+fi
+
+# Check suspicious 404
+SUSPICIOUS_404=$(awk '$9 == 404 {print $1}' $LOG_FILE | sort | uniq -c | awk '$1 > 3')
+
+if [ ! -z "$SUSPICIOUS_404" ]; then
+    ALERT_MSG+="Suspicious 404 Attempts:\n$SUSPICIOUS_404\n\n"
+fi
+
+# Send mail if alert exists
+if [ ! -z "$ALERT_MSG" ]; then
+    echo -e "$ALERT_MSG" | mail -s "SECURITY ALERT - Log Analyzer" $ADMIN_EMAIL
+    echo "Email alert sent to $ADMIN_EMAIL"
+else
+    echo "No email alert needed."
+fi
