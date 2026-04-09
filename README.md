@@ -2,7 +2,7 @@
 
 A powerful, bash-based utility designed to analyze web server access logs (Apache/Nginx format). It provides deep insights into traffic patterns, identifies common errors, and detects potential security threats through automated log parsing and analytics.
 
-## 🚀 Features
+## Features
 
 - **Automated Summaries**: Get total requests, top IP addresses, and status code distributions (2xx, 4xx, 5xx) at a glance.
 - **Security Monitoring**: Identify suspicious activity like brute-force attempts (401 Unauthorized) or excessive scanning (404 Not Found).
@@ -10,14 +10,14 @@ A powerful, bash-based utility designed to analyze web server access logs (Apach
 - **HTML Reports**: Generates a clean, professional HTML report for easy sharing and documentation.
 - **Email Alerts**: Automatically sends security alerts to administrators when suspicious activity thresholds are met.
 
-## 🛠 Prerequisites
+## Prerequisites
 
 Ensure you have the following installed on your Linux system:
 - `bash`
 - `awk`
 - `mailutils` (for email alerts)
 
-## 📦 Installation
+## Installation
 
 1. Clone the repository:
    ```bash
@@ -29,7 +29,7 @@ Ensure you have the following installed on your Linux system:
    chmod +x log_analyzer.sh
    ```
 
-## 🚀 Usage
+## Usage
 
 Run the script by providing the path to your log file using the `-f` flag.
 
@@ -48,14 +48,14 @@ Example with custom thresholds:
 ./log_analyzer.sh -f access.log -t 10 -l 5
 ```
 
-## 📂 Project Structure
+## Project Structure
 
 - `log_analyzer.sh`: The core analysis engine.
 - `sample_logs/`: Directory containing example logs for testing.
 - `reports/`: Destination for generated HTML reports.
 - `README.md`: This file.
 
-## 📊 Sample Output (Console)
+## Sample Output (Console)
 ```text
 ===============================================
             LOG ANALYZER REPORT
@@ -75,7 +75,7 @@ Peak Traffic Hour:
 ---------------------------------------------
 ```
 
-## 📧 Security Alerts
+## Security Alerts
 The tool monitors for:
 - **Excessive 401 Unauthorized**: Potential login brute-force.
 - **Excessive 404 Not Found**: Potential vulnerability scanning or broken links.
